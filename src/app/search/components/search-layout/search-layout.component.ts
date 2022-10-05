@@ -18,7 +18,10 @@ export class SearchLayoutComponent {
   constructor(private giphyService: GiphyService) {
     this.giphyService
       .getCurrentStep()
-      .pipe(first())
+      .pipe(
+        first(),
+
+      )
       .subscribe((data) => {
         this.currentStep = data;
       });
