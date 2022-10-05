@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { debounce, distinctUntilChanged, filter, interval, tap } from 'rxjs';
 import { GiphyService } from '../../services/giphy.service';
@@ -9,21 +9,22 @@ import { StepEnum } from '../search-layout/search-layout.component';
   templateUrl: './search-input.component.html',
   styleUrls: ['./search-input.component.scss'],
 })
-export class SearchInputComponent implements OnInit {
+export class SearchInputComponent {
   searchControl = new FormControl('');
   @Output() changePage = new EventEmitter<string>();
   constructor(private giphyService: GiphyService) {
     this.searchControl.valueChanges
       .pipe(
-        filter((input) => input),
         debounce(() => interval(1200)),
-        distinctUntilChanged(),
+        distinctUntilChanged()
       )
       .subscribe((input: string) => {
-        this.giphyService.setCurrentSearchKey(input);
-        this.changePage.emit(StepEnum.Searching);
+        if (!!input) {
+          this.giphyService.setCurrentSearchKey(input);
+          this.changePage.emit(StepEnum.Searching);
+          return;
+        }
+        this.changePage.emit(StepEnum.Trending);
       });
   }
-
-  ngOnInit(): void {}
 }

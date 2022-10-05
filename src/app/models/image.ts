@@ -3,6 +3,7 @@ export interface ImageModel {
   rating: string;
   title: string;
   images: FixedWithImage;
+  create_datetime: string;
 }
 
 export interface FixedWithImage {

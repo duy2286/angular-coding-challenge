@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { GiphyService } from '../../services/giphy.service';
-import {filter, first, Subject, switchMap, takeUntil, tap} from 'rxjs';
-import {ImageModel} from "../../../models/image";
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {GiphyService} from '../../services/giphy.service';
+import {filter, finalize, first, Subject, switchMap, takeUntil, tap} from 'rxjs';
+import {ImageModel} from '../../../models/image';
 
 @Component({
   selector: 'app-search-normal',
   templateUrl: './search-normal.component.html',
   styleUrls: ['./search-normal.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchNormalComponent implements OnInit {
   listImages: ImageModel[] = [];
@@ -15,7 +16,10 @@ export class SearchNormalComponent implements OnInit {
   searchKey = '';
 
   private destroy$ = new Subject<void>();
-  constructor(private giphyService: GiphyService) {}
+  constructor(
+    private giphyService: GiphyService,
+    private cd: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     this.giphyService
@@ -33,6 +37,9 @@ export class SearchNormalComponent implements OnInit {
             this.PAGE_NUMBER
           );
         }),
+        finalize(() => {
+          this.cd.markForCheck();
+        }),
         takeUntil(this.destroy$)
       )
       .subscribe((response) => {
@@ -41,7 +48,22 @@ export class SearchNormalComponent implements OnInit {
   }
 
   navigate(url: string) {
-    window.open(url, "_blank");
+    window.open(url, '_blank');
+  }
+
+  onScrollDown() {
+    console.log('scroll down')
+    this.giphyService
+      .getGiphyImages(this.searchKey, this.PAGE_ITEMS, ++this.PAGE_NUMBER)
+      .pipe(
+        finalize(() => {
+          this.cd.markForCheck();
+        }),
+        takeUntil(this.destroy$)
+      )
+      .subscribe((data) => {
+        this.listImages.push(...data.data);
+      });
   }
 
   ngOnDestroy(): void {

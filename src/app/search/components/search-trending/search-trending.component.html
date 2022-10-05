@@ -1,1 +1,7 @@
-<app-search-result [listImages]="listImageTrending"></app-search-result>
+<ng-container *ngIf="listImageTrending.length; else loadingTemplate">
+  <app-search-result [listImages]="listImageTrending"></app-search-result>
+</ng-container>
+
+<ng-template #loadingTemplate>
+  <app-search-loading></app-search-loading>
+</ng-template>

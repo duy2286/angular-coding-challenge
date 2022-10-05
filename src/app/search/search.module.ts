@@ -10,6 +10,8 @@ import { SearchNormalComponent } from './components/search-normal/search-normal.
 import { SearchLayoutComponent } from './components/search-layout/search-layout.component';
 import { SearchInputComponent } from './components/search-input/search-input.component';
 import { SearchResultComponent } from './components/search-result/search-result.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { SearchLoadingComponent } from './components/search-loading/search-loading.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,7 @@ import { SearchResultComponent } from './components/search-result/search-result.
     SearchLayoutComponent,
     SearchInputComponent,
     SearchResultComponent,
+    SearchLoadingComponent,
   ],
   imports: [
     CommonModule,
@@ -25,6 +28,7 @@ import { SearchResultComponent } from './components/search-result/search-result.
     SearchRoutingModule,
     ReactiveFormsModule,
     InfiniteScrollModule,
+    ModalModule.forRoot()
   ],
 })
 export class SearchModule {}

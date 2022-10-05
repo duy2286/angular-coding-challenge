@@ -1,8 +1,22 @@
 <div class="container">
   <ng-container *ngFor="let item of listImages; let i = index">
-    <div class="tile" (click)="navigate(item.images.fixed_width.url)">
+    <div class="tile" (click)="openModal(template, item)">
       <img src="{{ item.images.fixed_width.url }}" class="img" alt="" />
       <span class="title">{{ item.title }}</span>
     </div>
   </ng-container>
 </div>
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Detail of image</h4>
+    <button type="button" class="close btn-close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <h1>Title: {{modalService.config.initialState?.['title']}}</h1>
+    <h3>Username: {{modalService.config.initialState?.['username']}}</h3>
+    <h3>Rating: {{modalService.config.initialState?.['rating']}}</h3>
+  </div>
+</ng-template>
