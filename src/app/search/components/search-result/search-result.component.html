@@ -1,0 +1,8 @@
+<div class="container">
+  <ng-container *ngFor="let item of listImages; let i = index">
+    <div class="tile" (click)="navigate(item.images.fixed_width.url)">
+      <img src="{{ item.images.fixed_width.url }}" class="img" alt="" />
+      <span class="title">{{ item.title }}</span>
+    </div>
+  </ng-container>
+</div>

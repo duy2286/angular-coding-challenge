@@ -1,0 +1,9 @@
+<div id="root">
+  <div class="container">
+    <app-search-input (changePage)="changePage($event)"></app-search-input>
+    <ng-container [ngSwitch]="currentStep">
+      <app-search-normal *ngSwitchCase="stepEnum.Searching"></app-search-normal>
+      <app-search-trending *ngSwitchCase="stepEnum.Trending"></app-search-trending>
+    </ng-container>
+  </div>
+</div>

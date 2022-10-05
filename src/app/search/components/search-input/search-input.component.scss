@@ -1,0 +1,24 @@
+.container {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  padding: 0 55px;
+  border-bottom: solid 1px rgba(15, 15, 43, 0.1);
+  #search-ico {
+    font-size: 35px;
+    color: #0f0f2b;
+    opacity: 0.8;
+  }
+  #search-input {
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-style: hidden;
+    outline: none;
+    width: 80%;
+    color: #202842;
+    font-size: 18px;
+    font-family: Muli;
+    margin-left: 15px;
+  }
+}

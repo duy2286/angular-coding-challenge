@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apikey: 'Gc7131jiJuvI7IdN0HZ1D7nh0ow5BU6g',
+  pingback_id: '183975357fb76184',
+  baseurl: 'https://api.giphy.com/v1/gifs/search',
+  baseUrlTrending: 'https://api.giphy.com/v1/gifs/trending',
 };
 
 /*
