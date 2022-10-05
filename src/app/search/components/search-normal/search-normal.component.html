@@ -1,12 +1,10 @@
 <div
   *ngIf="listImages.length; else showLoading"
   class="search-results"
-  infiniteScroll
-  [infiniteScrollDistance]="10"
-  [infiniteScrollUpDistance]="1.5"
+  infinite-scroll
+  [infiniteScrollDistance]="2"
   [infiniteScrollThrottle]="50"
   (scrolled)="onScrollDown()"
-  [fromRoot]="true"
 >
   <app-search-result [listImages]="listImages"></app-search-result>
 </div>

@@ -1,13 +1,26 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {GiphyService} from '../../services/giphy.service';
-import {filter, finalize, first, Subject, switchMap, takeUntil, tap} from 'rxjs';
-import {ImageModel} from '../../../models/image';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+} from '@angular/core';
+import { GiphyService } from '../../services/giphy.service';
+import {
+  filter,
+  finalize,
+  first,
+  Subject,
+  switchMap,
+  takeUntil,
+  tap,
+} from 'rxjs';
+import { ImageModel } from '../../../models/image';
 
 @Component({
   selector: 'app-search-normal',
   templateUrl: './search-normal.component.html',
   styleUrls: ['./search-normal.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchNormalComponent implements OnInit {
   listImages: ImageModel[] = [];
@@ -52,7 +65,7 @@ export class SearchNormalComponent implements OnInit {
   }
 
   onScrollDown() {
-    console.log('scroll down')
+    console.log('scroll down');
     this.giphyService
       .getGiphyImages(this.searchKey, this.PAGE_ITEMS, ++this.PAGE_NUMBER)
       .pipe(
@@ -63,6 +76,7 @@ export class SearchNormalComponent implements OnInit {
       )
       .subscribe((data) => {
         this.listImages.push(...data.data);
+        console.log('lenth', this.listImages.length);
       });
   }
 
